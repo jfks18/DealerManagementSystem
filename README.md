@@ -141,6 +141,12 @@ npm run build
 2. Enter your credentials (see [Default Test Credentials](#default-test-credentials))
 3. Click **Login**
 
+### Filament Admin Panel
+
+1. Open your browser and go to: **http://localhost:8000/admin**
+2. Log in using an **Area Manager** account
+3. The Filament panel is restricted to area managers only
+
 ### First-Time Access
 
 If you're seeing a login page but the frontend doesn't load:
@@ -157,6 +163,7 @@ If you're seeing a login page but the frontend doesn't load:
 **Login with:** `admin@example.com` / `password`
 
 **Available Actions:**
+- **Filament Admin Panel** - Access the Laravel admin interface at `/admin`
 - **Dashboard** - View branch submission status and daily summaries
 - **Branches** - Create new branches and manage branch manager accounts
 - **Quotas** - Set monthly sales quotas for each branch

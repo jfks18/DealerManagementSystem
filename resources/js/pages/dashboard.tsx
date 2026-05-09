@@ -81,7 +81,7 @@ function AppRouter({ defaultRole, defaultBranchId }: { defaultRole: Role; defaul
     const [branchId, setBranchId] = useState<number>(defaultBranchId);
 
     return (
-        <div className="min-h-screen bg-[linear-gradient(135deg,#f8fafc_0%,#eef6ff_45%,#f3faf7_100%)] text-slate-900">
+        <div className="min-h-screen bg-[#F1F5F9] text-gray-800">
             <Routes>
                 <Route
                     path="/login"
@@ -166,46 +166,89 @@ function LoginPage({ onLogin }: { onLogin: (role: Role, branchId: number) => voi
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center p-4 md:p-8">
-            <div className="w-full max-w-md rounded-3xl border border-slate-200/70 bg-white/90 p-7 shadow-[0_20px_60px_-28px_rgba(15,23,42,0.35)] backdrop-blur-sm">
-                <div className="mb-6">
-                    <p className="mb-2 inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold tracking-wide text-cyan-700">BRANCH INTELLIGENCE</p>
-                    <h1 className="mb-1 text-2xl font-extrabold tracking-tight text-slate-900">Motorcycle Branch Management</h1>
-                    <p className="text-sm text-slate-600">Sign in to access real-time branch performance and quota controls.</p>
+        <div className="flex min-h-screen bg-[#F1F5F9]">
+            {/* Left brand panel */}
+            <div className="hidden w-1/2 flex-col justify-between bg-[#1C2434] p-12 lg:flex">
+                <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#3C50E0]">
+                        <Bike className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-lg font-bold text-white">BranchMS</span>
                 </div>
-
-                <form onSubmit={submit} className="space-y-4">
-                    <div>
-                        <label className="mb-1 block text-sm font-semibold text-slate-700">Email</label>
-                        <input
-                            type="email"
-                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
-                            value={form.email}
-                            onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
-                            required
-                        />
+                <div>
+                    <h1 className="text-4xl font-bold leading-tight text-white">
+                        Motorcycle Branch<br />Management System
+                    </h1>
+                    <p className="mt-4 text-base text-gray-400">
+                        Manage quotas, daily sales, and branch performance from one central dashboard.
+                    </p>
+                    <div className="mt-8 grid gap-3">
+                        <div className="flex items-start gap-3 rounded-sm border border-white/10 bg-white/5 p-4">
+                            <div className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-[#3C50E0]" />
+                            <div>
+                                <p className="text-sm font-semibold text-white">Area Manager</p>
+                                <p className="text-sm text-gray-400">Create branches, set quotas, view area-wide reports.</p>
+                            </div>
+                        </div>
+                        <div className="flex items-start gap-3 rounded-sm border border-white/10 bg-white/5 p-4">
+                            <div className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
+                            <div>
+                                <p className="text-sm font-semibold text-white">Branch Manager</p>
+                                <p className="text-sm text-gray-400">Submit daily entries, track quotas, export reports.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label className="mb-1 block text-sm font-semibold text-slate-700">Password</label>
-                        <input
-                            type="password"
-                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
-                            value={form.password}
-                            onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
-                            required
-                        />
+                </div>
+                <p className="text-xs text-gray-500">© 2026 Branch Management System</p>
+            </div>
+
+            {/* Right login form */}
+            <div className="flex flex-1 items-center justify-center p-6 sm:p-10">
+                <div className="w-full max-w-md">
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold text-gray-900">Sign In</h2>
+                        <p className="mt-1 text-sm text-gray-500">Enter your credentials to access your account.</p>
                     </div>
 
-                    {error && <p className="text-sm text-rose-600">{error}</p>}
+                    <div className="rounded-sm border border-gray-200 bg-white p-8 shadow-sm">
+                        <form onSubmit={submit} className="space-y-5">
+                            <div>
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Email Address</label>
+                                <input
+                                    type="email"
+                                    className="w-full rounded-sm border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
+                                    placeholder="your@email.com"
+                                    value={form.email}
+                                    onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Password</label>
+                                <input
+                                    type="password"
+                                    className="w-full rounded-sm border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
+                                    placeholder="••••••••"
+                                    value={form.password}
+                                    onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
+                                    required
+                                />
+                            </div>
 
-                    <button
-                        type="submit"
-                        disabled={pending}
-                        className="w-full rounded-xl bg-gradient-to-r from-cyan-600 to-emerald-600 px-4 py-2.5 font-semibold text-white shadow-lg shadow-cyan-700/20 transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70"
-                    >
-                        {pending ? 'Logging in...' : 'Login'}
-                    </button>
-                </form>
+                            {error && (
+                                <p className="rounded-sm border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">{error}</p>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={pending}
+                                className="w-full rounded-sm bg-[#3C50E0] px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+                            >
+                                {pending ? 'Signing in...' : 'Sign In'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -213,7 +256,7 @@ function LoginPage({ onLogin }: { onLogin: (role: Role, branchId: number) => voi
 
 function AreaManagerLayout() {
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen bg-[#F1F5F9]">
             <Sidebar
                 title="Area Manager"
                 items={[
@@ -224,7 +267,7 @@ function AreaManagerLayout() {
                     { to: '/area/history', label: 'History', icon: <History className="h-4 w-4" /> },
                 ]}
             />
-            <main className="flex-1 p-4 md:p-7">
+            <main className="flex-1 p-4 md:p-6 lg:p-8">
                 <div className="mx-auto max-w-7xl">
                     <Outlet />
                 </div>
@@ -235,7 +278,7 @@ function AreaManagerLayout() {
 
 function BranchManagerLayout() {
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen bg-[#F1F5F9]">
             <Sidebar
                 title="Branch Manager"
                 items={[
@@ -244,7 +287,7 @@ function BranchManagerLayout() {
                     { to: '/branch/my-reports', label: 'My Reports', icon: <ClipboardList className="h-4 w-4" /> },
                 ]}
             />
-            <main className="flex-1 p-4 md:p-7">
+            <main className="flex-1 p-4 md:p-6 lg:p-8">
                 <div className="mx-auto max-w-7xl">
                     <Outlet />
                 </div>
@@ -263,33 +306,39 @@ function Sidebar({
     const navigate = useNavigate();
 
     return (
-        <aside className="sticky top-0 h-screen w-72 border-r border-slate-200/70 bg-white/75 p-4 backdrop-blur-xl">
-            <div className="mb-6 rounded-2xl border border-slate-200/70 bg-white p-3 shadow-sm">
-                <div className="flex items-center gap-2 rounded-xl bg-slate-900 px-3 py-2 text-white">
-                    <Bike className="h-5 w-5" />
-                    <span className="text-sm font-semibold tracking-wide">{title}</span>
+        <aside className="sticky top-0 flex h-screen w-64 flex-col bg-[#1C2434] text-white">
+            {/* Logo / Brand */}
+            <div className="flex items-center gap-3 border-b border-white/10 px-6 py-5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#3C50E0]">
+                    <Bike className="h-5 w-5 text-white" />
                 </div>
+                <span className="text-sm font-bold tracking-wide text-white">{title}</span>
             </div>
-            <nav className="space-y-1">
-                {items.map((item) => (
-                    <NavLink
-                        key={item.to}
-                        to={item.to}
-                        end={item.to.endsWith('/area') || item.to.endsWith('/branch')}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                                isActive
-                                    ? 'bg-gradient-to-r from-cyan-600 to-sky-600 text-white shadow-md shadow-cyan-700/20'
-                                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                            }`
-                        }
-                    >
-                        {item.icon}
-                        {item.label}
-                    </NavLink>
-                ))}
+            {/* Navigation */}
+            <nav className="flex-1 overflow-y-auto px-4 py-5">
+                <p className="mb-3 px-3 text-[0.65rem] font-semibold uppercase tracking-widest text-gray-400">MENU</p>
+                <div className="space-y-1">
+                    {items.map((item) => (
+                        <NavLink
+                            key={item.to}
+                            to={item.to}
+                            end={item.to.endsWith('/area') || item.to.endsWith('/branch')}
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-sm px-4 py-2.5 text-sm font-medium transition ${
+                                    isActive
+                                        ? 'bg-[#3C50E0] text-white'
+                                        : 'text-[#DEE4EE] hover:bg-white/5 hover:text-white'
+                                }`
+                            }
+                        >
+                            {item.icon}
+                            {item.label}
+                        </NavLink>
+                    ))}
+                </div>
             </nav>
-            <div className="mt-8 space-y-2 border-t border-slate-200 pt-4">
+            {/* Logout */}
+            <div className="border-t border-white/10 px-4 py-4">
                 <button
                     type="button"
                     onClick={async () => {
@@ -305,7 +354,7 @@ function Sidebar({
                         }
                         navigate('/login');
                     }}
-                    className="flex w-full items-center gap-2 rounded-xl border border-rose-100 bg-rose-50 px-3 py-2.5 text-sm font-semibold text-rose-700 transition hover:bg-rose-100"
+                    className="flex w-full items-center gap-3 rounded-sm px-4 py-2.5 text-sm font-medium text-[#DEE4EE] transition hover:bg-red-500/10 hover:text-red-300"
                 >
                     <LogOut className="h-4 w-4" />
                     Logout
@@ -449,7 +498,7 @@ function AreaDashboardPage() {
             {error && <p className="text-sm text-rose-600">{error}</p>}
 
             <div className="grid gap-4 lg:grid-cols-2">
-                <section className="rounded-2xl border border-slate-200/70 bg-white/90 p-4 shadow-[0_12px_34px_-28px_rgba(15,23,42,0.45)]">
+                <section className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                     <div className="mb-4 flex items-start justify-between">
                         <div>
                             <h2 className="font-semibold text-slate-900">Monthly Sales Snapshot</h2>
@@ -470,7 +519,7 @@ function AreaDashboardPage() {
                                 <Tooltip
                                     contentStyle={{ borderRadius: 14, border: '1px solid #dbe4ef', boxShadow: '0 12px 34px -24px rgba(15,23,42,0.5)' }}
                                     labelStyle={{ color: '#0f172a', fontWeight: 700 }}
-                                    formatter={(value: number) => [formatCompactNumber(value), '']}
+                                    formatter={(value) => [formatCompactNumber(Number(value ?? 0)), '']}
                                 />
                                 <Legend wrapperStyle={{ fontSize: '12px', fontWeight: 600, color: '#334155' }} />
                                 <Line
@@ -502,7 +551,7 @@ function AreaDashboardPage() {
                         </ResponsiveContainer>
                     </div>
                 </section>
-                <section className="rounded-2xl border border-slate-200/70 bg-white/90 p-4 shadow-[0_12px_34px_-28px_rgba(15,23,42,0.45)]">
+                <section className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                     <div className="mb-4 flex items-start justify-between">
                         <div>
                             <h2 className="font-semibold text-slate-900">Branch Performance</h2>
@@ -523,7 +572,7 @@ function AreaDashboardPage() {
                                 <Tooltip
                                     contentStyle={{ borderRadius: 14, border: '1px solid #dbe4ef', boxShadow: '0 12px 34px -24px rgba(15,23,42,0.5)' }}
                                     labelStyle={{ color: '#0f172a', fontWeight: 700 }}
-                                    formatter={(value: number) => [formatCompactNumber(value), 'Units']}
+                                    formatter={(value) => [formatCompactNumber(Number(value ?? 0)), 'Units']}
                                 />
                                 <Legend wrapperStyle={{ fontSize: '12px', fontWeight: 600, color: '#334155' }} />
                                 <Bar name="Units" dataKey="units" fill="#0891b2" radius={[10, 10, 6, 6]} />
@@ -538,7 +587,7 @@ function AreaDashboardPage() {
     );
 }
 
-function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; branchName: string; units: number; submittedToday: boolean; missingDaysCount: number; latestMissingDate: string | null; missingDates: string[] }[] }) {
+function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; branchName: string; units: number; submittedToday?: boolean; missingDaysCount?: number; latestMissingDate?: string | null; missingDates?: string[] }[] }) {
     const navigate = useNavigate();
     const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'submitted'>('all');
 
@@ -549,10 +598,10 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
               area: '-',
               manager: '-',
               units: item.units,
-              submittedToday: item.submittedToday,
-                            missingDaysCount: item.missingDaysCount,
-                            latestMissingDate: item.latestMissingDate,
-                            missingDates: item.missingDates,
+                            submittedToday: item.submittedToday ?? false,
+                                                        missingDaysCount: item.missingDaysCount ?? 0,
+                                                        latestMissingDate: item.latestMissingDate ?? null,
+                                                        missingDates: item.missingDates ?? [],
           }))
         : [];
 
@@ -572,28 +621,28 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
     const submittedCount = rows.filter((branch) => branch.submittedToday).length;
 
     return (
-        <section className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm">
+        <section className="rounded-sm border border-gray-200 bg-white px-5 py-4 shadow-sm">
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-semibold">Branch List</h2>
-                <div className="inline-flex rounded-xl border border-slate-200 bg-white p-1">
+                <h2 className="text-base font-semibold text-gray-900">Branch List</h2>
+                <div className="inline-flex rounded-sm border border-gray-200 bg-white p-1">
                     <button
                         type="button"
                         onClick={() => setStatusFilter('all')}
-                        className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${statusFilter === 'all' ? 'bg-cyan-600 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+                        className={`rounded-sm px-3 py-1.5 text-xs font-semibold transition ${statusFilter === 'all' ? 'bg-[#3C50E0] text-white' : 'text-gray-600 hover:bg-gray-100'}`}
                     >
                         All ({rows.length})
                     </button>
                     <button
                         type="button"
                         onClick={() => setStatusFilter('pending')}
-                        className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${statusFilter === 'pending' ? 'bg-amber-500 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+                        className={`rounded-sm px-3 py-1.5 text-xs font-semibold transition ${statusFilter === 'pending' ? 'bg-amber-500 text-white' : 'text-gray-600 hover:bg-gray-100'}`}
                     >
                         Pending ({pendingCount})
                     </button>
                     <button
                         type="button"
                         onClick={() => setStatusFilter('submitted')}
-                        className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${statusFilter === 'submitted' ? 'bg-emerald-600 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+                        className={`rounded-sm px-3 py-1.5 text-xs font-semibold transition ${statusFilter === 'submitted' ? 'bg-emerald-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}
                     >
                         Submitted ({submittedCount})
                     </button>
@@ -604,10 +653,10 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
                     const missingDates = branch.missingDates ?? [];
 
                     return (
-                        <article key={branch.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                        <article key={branch.id} className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                             <div className="mb-2 flex items-center justify-between">
                                 <h3 className="font-semibold text-slate-900">{branch.name}</h3>
-                                <span className="rounded-full bg-cyan-50 px-2 py-1 text-xs font-semibold text-cyan-700">{branch.units} units</span>
+                                <span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-[#3C50E0]">{branch.units} units</span>
                             </div>
                             <p className="text-xs text-slate-500">Area: {branch.area}</p>
                             <p className="text-xs text-slate-500">Manager: {branch.manager}</p>
@@ -623,7 +672,7 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
                             <button
                                 type="button"
                                 onClick={() => navigate(`/area/branches/${branch.id}`)}
-                                className="mt-3 rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white"
+                                className="mt-3 rounded-sm bg-[#3C50E0] px-3 py-1.5 text-xs font-semibold text-white"
                             >
                                 View Detail
                             </button>
@@ -632,10 +681,10 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
                 })}
             </div>
 
-            <div className="hidden overflow-x-auto rounded-2xl border border-slate-200/70 bg-white md:block">
+            <div className="hidden overflow-x-auto rounded-sm border border-gray-200 bg-white md:block">
                 <table className="w-full text-left text-sm">
                     <thead>
-                        <tr className="sticky top-0 z-10 border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                        <tr className="sticky top-0 z-10 border-b border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wide text-gray-600">
                             <th className="px-3 py-2.5">Branch</th>
                             <th className="px-3 py-2.5">Area</th>
                             <th className="px-3 py-2.5">Manager</th>
@@ -651,7 +700,7 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
 
                             return (
                                 <Fragment key={branch.id}>
-                                <tr className={`border-b border-slate-100 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}`}>
+                                <tr className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}`}>
                                     <td className="px-3 py-2.5 font-semibold text-slate-900">{branch.name}</td>
                                     <td className="px-3 py-2.5 text-slate-700">{branch.area}</td>
                                     <td className="px-3 py-2.5 text-slate-700">{branch.manager}</td>
@@ -663,7 +712,7 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
                                     </td>
                                     <td className="px-3 py-2.5 text-slate-700">
                                         <div className="flex items-center gap-2">
-                                            <span className={`font-semibold ${branch.missingDaysCount > 0 ? 'text-rose-700' : 'text-emerald-700'}`}>{branch.missingDaysCount}</span>
+                                            <span className={`font-semibold ${(branch.missingDaysCount ?? 0) > 0 ? 'text-rose-700' : 'text-emerald-700'}`}>{branch.missingDaysCount ?? 0}</span>
                                             {branch.latestMissingDate ? <span className="text-xs">latest: {branch.latestMissingDate}</span> : null}
                                         </div>
                                     </td>
@@ -671,7 +720,7 @@ function BranchesTable({ dashboardRows }: { dashboardRows?: { branchId: number; 
                                         <button
                                             type="button"
                                             onClick={() => navigate(`/area/branches/${branch.id}`)}
-                                            className="rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:brightness-105"
+                                            className="rounded-sm bg-[#3C50E0] px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-[#2f42c6]"
                                         >
                                             View Detail
                                         </button>
@@ -768,7 +817,7 @@ function BranchDetailPage() {
                 <SummaryCard label="Progress Percentage" value={`${progress}%`} />
             </div>
 
-            <div className="flex gap-2 rounded-xl border border-slate-200 bg-white p-2">
+            <div className="flex gap-1 border-b border-gray-200 bg-white px-2">
                 <TabButton active={tab === 'daily'} onClick={() => setTab('daily')} label="Daily Reports" />
                 <TabButton active={tab === 'summary'} onClick={() => setTab('summary')} label="Monthly Summary" />
                 <TabButton active={tab === 'history'} onClick={() => setTab('history')} label="History" />
@@ -779,10 +828,10 @@ function BranchDetailPage() {
             )}
 
             {tab === 'summary' && (
-                <div className="overflow-x-auto rounded-2xl border border-white/70 bg-white/90 p-3">
+                <div className="overflow-x-auto rounded-sm border border-gray-200 bg-white p-3">
                     <table className="w-full text-left text-sm">
                         <thead>
-                            <tr className="border-b border-slate-200 text-slate-500">
+                            <tr className="border-b border-gray-200 text-gray-600">
                                 <th className="p-2">Month</th>
                                 <th className="p-2">Total Units</th>
                                 <th className="p-2">Installment</th>
@@ -793,7 +842,7 @@ function BranchDetailPage() {
                         </thead>
                         <tbody>
                             {summaryRows.map((item) => (
-                                <tr key={item.month} className="border-b border-slate-100">
+                                <tr key={item.month} className="border-b border-gray-100">
                                     <td className="p-2">{item.month}</td>
                                     <td className="p-2">{item.totalUnits}</td>
                                     <td className="p-2">{item.installmentUnits}</td>
@@ -808,10 +857,10 @@ function BranchDetailPage() {
             )}
 
             {tab === 'history' && (
-                <div className="overflow-x-auto rounded-2xl border border-white/70 bg-white/90 p-3">
+                <div className="overflow-x-auto rounded-sm border border-gray-200 bg-white p-3">
                     <table className="w-full text-left text-sm">
                         <thead>
-                            <tr className="border-b border-slate-200 text-slate-500">
+                            <tr className="border-b border-gray-200 text-gray-600">
                                 <th className="p-2">Month</th>
                                 <th className="p-2">Total Units</th>
                                 <th className="p-2">Installment</th>
@@ -822,7 +871,7 @@ function BranchDetailPage() {
                         </thead>
                         <tbody>
                             {historyRows.map((item) => (
-                                <tr key={item.month} className="border-b border-slate-100">
+                                <tr key={item.month} className="border-b border-gray-100">
                                     <td className="p-2">{item.month}</td>
                                     <td className="p-2">{item.total_units_actual}</td>
                                     <td className="p-2">{item.installment_units_actual}</td>
@@ -844,10 +893,10 @@ function BranchDailyReportsTable({ rows }: { rows: ApiDailyReport[] }) {
         <>
             <div className="grid gap-3 md:hidden">
                 {rows.map((item) => (
-                    <article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <article key={item.id} className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                         <div className="mb-2 flex items-center justify-between">
                             <h3 className="font-semibold text-slate-900">{item.date}</h3>
-                            <span className="rounded-full bg-cyan-50 px-2 py-1 text-xs font-semibold text-cyan-700">{item.total_units_actual} units</span>
+                            <span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-[#3C50E0]">{item.total_units_actual} units</span>
                         </div>
                         <p className="text-xs text-slate-600">Installment: {item.installment_units_actual}</p>
                         <p className="text-xs text-slate-600">Cash: {item.total_units_actual - item.installment_units_actual}</p>
@@ -857,10 +906,10 @@ function BranchDailyReportsTable({ rows }: { rows: ApiDailyReport[] }) {
                 ))}
             </div>
 
-            <div className="hidden overflow-x-auto rounded-2xl border border-slate-200/70 bg-white md:block">
+            <div className="hidden overflow-x-auto rounded-sm border border-gray-200 bg-white md:block">
             <table className="w-full text-left text-sm">
                 <thead>
-                    <tr className="sticky top-0 z-10 border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                    <tr className="sticky top-0 z-10 border-b border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wide text-gray-600">
                         <th className="px-3 py-2.5">Date</th>
                         <th className="px-3 py-2.5">Installment</th>
                         <th className="px-3 py-2.5">Total</th>
@@ -871,7 +920,7 @@ function BranchDailyReportsTable({ rows }: { rows: ApiDailyReport[] }) {
                 </thead>
                 <tbody>
                     {rows.map((item, index) => (
-                        <tr key={item.id} className={`border-b border-slate-100 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}`}>
+                        <tr key={item.id} className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}`}>
                             <td className="px-3 py-2.5">{item.date}</td>
                             <td className="px-3 py-2.5">{item.installment_units_actual}</td>
                             <td className="px-3 py-2.5">{item.total_units_actual}</td>
@@ -958,50 +1007,62 @@ function BranchManagerDashboardPage({ branchId }: { branchId: number }) {
 
     return (
         <div className="mx-auto max-w-4xl space-y-6">
-            <h1 className="text-2xl font-bold">Branch Manager Dashboard</h1>
+            <header className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div>
+                        <p className="inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-[0.7rem] font-semibold tracking-[0.18em] text-emerald-700">
+                            BRANCH MANAGER
+                        </p>
+                        <h1 className="mt-3 text-2xl font-semibold tracking-tight text-slate-950">Branch Manager Dashboard</h1>
+                        <p className="mt-1 text-sm text-slate-600">Review your branch, quota progress, and submission status at a glance.</p>
+                    </div>
+                </div>
+            </header>
+
             {loading && <p className="text-sm text-slate-600">Loading branch dashboard...</p>}
             {error && <p className="text-sm text-rose-600">{error}</p>}
+
             <div className="grid gap-4 md:grid-cols-2">
-                <section className="rounded-xl border border-white/70 bg-white/80 p-4 shadow-sm">
-                    <h2 className="text-sm font-medium text-slate-600">Assigned Branch Info</h2>
-                    <p className="mt-2 text-lg font-semibold">{branchName}</p>
+                <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Assigned Branch Info</h2>
+                    <p className="mt-2 text-lg font-semibold text-slate-950">{branchName}</p>
                     <p className="text-sm text-slate-600">Branch ID: {branchId}</p>
                 </section>
-                <section className="rounded-xl border border-white/70 bg-white/80 p-4 shadow-sm">
-                    <h2 className="text-sm font-medium text-slate-600">Today's Submission Status</h2>
-                    <p className={`mt-2 inline-block rounded-full px-3 py-1 text-sm font-medium ${todayStatus ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Today's Submission Status</h2>
+                    <p className={`mt-2 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${todayStatus ? 'bg-emerald-500/10 text-emerald-700' : 'bg-amber-500/10 text-amber-700'}`}>
                         {todayStatus ? 'Submitted' : 'Pending'}
                     </p>
                 </section>
 
-                <section className="rounded-xl border border-white/70 bg-white/80 p-4 shadow-sm md:col-span-2">
-                    <h2 className="text-sm font-medium text-slate-600">Monthly Quota Set By Area Manager</h2>
+                <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:col-span-2">
+                    <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Monthly Quota Set By Area Manager</h2>
                     <p className="mt-1 text-xs text-slate-500">{quotaMonthLabel}</p>
 
                     <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Total Units</p>
-                            <p className="mt-1 text-lg font-bold text-slate-900">{monthlyQuota.total_units_quota}</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-950">{monthlyQuota.total_units_quota}</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Installment Units</p>
-                            <p className="mt-1 text-lg font-bold text-slate-900">{monthlyQuota.installment_units_quota}</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-950">{monthlyQuota.installment_units_quota}</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Cash Units</p>
-                            <p className="mt-1 text-lg font-bold text-slate-900">{monthlyQuota.cash_units_quota}</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-950">{monthlyQuota.cash_units_quota}</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Parts Sales</p>
-                            <p className="mt-1 text-lg font-bold text-slate-900">{formatCurrency(monthlyQuota.parts_sales_quota)}</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-950">{formatCurrency(monthlyQuota.parts_sales_quota)}</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Labor</p>
-                            <p className="mt-1 text-lg font-bold text-slate-900">{formatCurrency(monthlyQuota.labor_quota)}</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-950">{formatCurrency(monthlyQuota.labor_quota)}</p>
                         </div>
-                        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
                             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">CPN / Non-CPN</p>
-                            <p className="mt-1 text-lg font-bold text-slate-900">{monthlyQuota.cpn_quota} / {monthlyQuota.non_cpn_quota}</p>
+                            <p className="mt-1 text-lg font-semibold text-slate-950">{monthlyQuota.cpn_quota} / {monthlyQuota.non_cpn_quota}</p>
                         </div>
                     </div>
                 </section>
@@ -1138,14 +1199,14 @@ function DailyEntryPage({ branchId }: { branchId: number }) {
 
     return (
         <div className="mx-auto grid max-w-6xl gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
-            <div className="rounded-2xl border border-slate-200/70 bg-white/90 p-6 shadow-[0_14px_36px_-28px_rgba(15,23,42,0.45)]">
+            <div className="rounded-sm border border-gray-200 bg-white p-6 shadow-sm">
                 <div className="mb-4 flex items-start justify-between gap-3">
                     <div>
                         <h1 className="text-2xl font-bold tracking-tight">Daily Entry Form</h1>
                         <p className="mt-1 text-sm text-slate-600">Select the actual report date to submit missed-day entries professionally.</p>
                     </div>
                     <div className="text-right">
-                        <span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">Branch #{branchId}</span>
+                        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-[#3C50E0]">Branch #{branchId}</span>
                     </div>
                 </div>
 
@@ -1171,14 +1232,13 @@ function DailyEntryPage({ branchId }: { branchId: number }) {
                                 setMessage(null);
                                 setEntryDate(nextDate);
                             }}
-                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
-                            required
+                    className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
                         />
                         <p className="mt-1 text-xs text-slate-500">You can submit previous dates if they were missed, except Sundays.</p>
                     </div>
 
                     {isEditingExisting && (
-                        <p className="rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-800">
+                        <p className="rounded-sm border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-[#3C50E0]">
                             Existing entry loaded for this date. Last update: {new Date(selectedReport.updated_at).toLocaleString('en-US')}
                         </p>
                     )}
@@ -1190,14 +1250,14 @@ function DailyEntryPage({ branchId }: { branchId: number }) {
                     <NumberField label="CPM serviced" value={form.cpnServiced} onChange={(value) => setForm((prev) => ({ ...prev, cpnServiced: value }))} />
                     <NumberField label="Non-CPN serviced" value={form.nonCpnServiced} onChange={(value) => setForm((prev) => ({ ...prev, nonCpnServiced: value }))} />
 
-                    <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-3 text-sm text-cyan-900">
+                    <div className="rounded-sm border border-blue-200 bg-blue-50 p-3 text-sm text-[#3C50E0]">
                         Cash sales (auto): <strong>{cashSales}</strong>
                     </div>
 
                     <button
                         type="submit"
                         disabled={pending}
-                        className="rounded-xl bg-emerald-600 px-4 py-2.5 font-semibold text-white shadow-sm transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70"
+                        className="rounded-sm bg-[#3C50E0] px-4 py-2.5 font-semibold text-white shadow-sm transition hover:bg-[#2f42c6] disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         {pending ? 'Saving...' : (isEditingExisting ? 'Update Report' : 'Submit Report')}
                     </button>
@@ -1207,7 +1267,7 @@ function DailyEntryPage({ branchId }: { branchId: number }) {
                 </form>
             </div>
 
-            <section className="h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <section className="h-fit rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="mb-2 flex items-center justify-between">
                     <p className="text-sm font-semibold text-slate-700">{monthTitle}</p>
                     <div className="flex items-center gap-2 text-xs text-slate-600">
@@ -1251,7 +1311,7 @@ function DailyEntryPage({ branchId }: { branchId: number }) {
                                 type="button"
                                 onClick={() => isTrackable && setEntryDate(date)}
                                 disabled={!isTrackable}
-                                className={`h-9 rounded-lg border text-xs font-semibold transition ${colorClass} ${isSelected ? 'ring-2 ring-cyan-500 ring-offset-1' : ''} ${isTrackable ? 'hover:brightness-95' : 'cursor-not-allowed'}`}
+                                className={`h-9 rounded-sm border text-xs font-semibold transition ${colorClass} ${isSelected ? 'ring-2 ring-[#3C50E0] ring-offset-1' : ''} ${isTrackable ? 'hover:brightness-95' : 'cursor-not-allowed'}`}
                                 title={isSunday ? 'No work on Sunday' : undefined}
                             >
                                 {day}
@@ -1331,14 +1391,14 @@ function MyReportsPage({ branchId }: { branchId: number }) {
     };
 
     return (
-        <div className="mx-auto max-w-5xl rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm">
+        <div className="mx-auto max-w-5xl rounded-sm border border-gray-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <h1 className="text-2xl font-bold">My Reports</h1>
                 <button
                     type="button"
                     onClick={() => void exportToExcel()}
                     disabled={rows.length === 0 || loading || exporting}
-                    className="rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold text-white transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-sm bg-[#3C50E0] px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#2f42c6] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                     {exporting ? 'Exporting...' : 'Export to Excel'}
                 </button>
@@ -1430,7 +1490,7 @@ function BranchesPage() {
     return (
         <div className="mx-auto max-w-7xl space-y-3">
             <h1 className="text-2xl font-bold">Branches ({currentMonth})</h1>
-            <form onSubmit={submitBranch} className="grid gap-3 rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm md:grid-cols-2">
+            <form onSubmit={submitBranch} className="grid gap-3 rounded-sm border border-gray-200 bg-white p-4 shadow-sm md:grid-cols-2">
                 <div className="md:col-span-2">
                     <h2 className="text-base font-semibold text-slate-900">Add Branch + Branch Head</h2>
                     <p className="text-xs text-slate-500">Area managers can create a new branch and assign its branch head here.</p>
@@ -1441,7 +1501,7 @@ function BranchesPage() {
                         type="text"
                         value={form.branch_name}
                         onChange={(event) => setForm((prev) => ({ ...prev, branch_name: event.target.value }))}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
+                        className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
                         required
                     />
                 </div>
@@ -1451,7 +1511,7 @@ function BranchesPage() {
                         type="text"
                         value={form.branch_head_name}
                         onChange={(event) => setForm((prev) => ({ ...prev, branch_head_name: event.target.value }))}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
+                        className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
                         required
                     />
                 </div>
@@ -1461,7 +1521,7 @@ function BranchesPage() {
                         type="email"
                         value={form.branch_head_email}
                         onChange={(event) => setForm((prev) => ({ ...prev, branch_head_email: event.target.value }))}
-                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
+                        className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
                         required
                     />
                 </div>
@@ -1469,7 +1529,7 @@ function BranchesPage() {
                     <button
                         type="submit"
                         disabled={creating}
-                        className="rounded-xl bg-cyan-600 px-4 py-2.5 font-semibold text-white transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-70"
+                        className="rounded-sm bg-[#3C50E0] px-4 py-2.5 font-semibold text-white transition hover:bg-[#2f42c6] disabled:cursor-not-allowed disabled:opacity-70"
                     >
                         {creating ? 'Creating...' : 'Create Branch'}
                     </button>
@@ -1479,12 +1539,12 @@ function BranchesPage() {
             {loading && <p className="text-sm text-slate-600">Loading branches...</p>}
             {error && <p className="text-sm text-rose-600">{error}</p>}
 
-            <section className="rounded-2xl border border-white/70 bg-white/80 p-4 shadow-sm">
+            <section className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                 <h2 className="mb-3 text-base font-semibold text-slate-900">Branch Heads</h2>
-                <div className="overflow-x-auto rounded-2xl border border-slate-200/70 bg-white">
+                <div className="overflow-x-auto rounded-sm border border-gray-200 bg-white">
                     <table className="w-full text-left text-sm">
                         <thead>
-                            <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                            <tr className="border-b border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wide text-gray-600">
                                 <th className="px-3 py-2.5">Branch</th>
                                 <th className="px-3 py-2.5">Branch Head</th>
                                 <th className="px-3 py-2.5">Email</th>
@@ -1493,7 +1553,7 @@ function BranchesPage() {
                         </thead>
                         <tbody>
                             {branchHeads.map((branch, index) => (
-                                <tr key={branch.id} className={`border-b border-slate-100 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}`}>
+                                <tr key={branch.id} className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}`}>
                                     <td className="px-3 py-2.5 font-semibold text-slate-900">{branch.name}</td>
                                     <td className="px-3 py-2.5 text-slate-700">{branch.branch_head_name ?? 'Not assigned'}</td>
                                     <td className="px-3 py-2.5 text-slate-700">{branch.branch_head_email ?? '-'}</td>
@@ -1636,7 +1696,7 @@ function QuotasPage() {
     const selectedBranch = branchOptions.find((item) => item.id === branchId);
 
     return (
-        <div className="mx-auto max-w-6xl space-y-4 rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm">
+        <div className="mx-auto max-w-6xl space-y-4 rounded-sm border border-gray-200 bg-white p-5 shadow-sm">
             <h1 className="text-2xl font-bold">Quotas</h1>
 
             <div className="grid gap-3 md:grid-cols-2">
@@ -1644,7 +1704,7 @@ function QuotasPage() {
                 <YearSelector year={year} onChange={setYear} />
             </div>
 
-            <section className="space-y-2 rounded-xl border border-slate-200 bg-white p-4">
+            <section className="space-y-2 rounded-sm border border-gray-200 bg-white p-4">
                 <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-600">Branches</h2>
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {branchOptions.map((item) => {
@@ -1655,7 +1715,7 @@ function QuotasPage() {
                                 key={item.id}
                                 type="button"
                                 onClick={() => setBranchId(item.id)}
-                                className={`rounded-lg border px-3 py-2 text-left text-sm font-semibold transition ${isActive ? 'border-cyan-400 bg-cyan-50 text-cyan-800' : 'border-slate-200 bg-white text-slate-700 hover:border-cyan-300 hover:bg-cyan-50/50'}`}
+                                className={`rounded-sm border px-3 py-2 text-left text-sm font-semibold transition ${isActive ? 'border-[#3C50E0] bg-blue-50 text-[#3C50E0]' : 'border-gray-200 bg-white text-gray-700 hover:border-[#3C50E0]/40 hover:bg-blue-50/50'}`}
                             >
                                 {item.name}
                             </button>
@@ -1703,12 +1763,12 @@ function QuotasPage() {
                     onChange={(value) => setForm((prev) => ({ ...prev, non_cpn_quota: value }))}
                 />
 
-                <div className="md:col-span-2 rounded-lg border border-cyan-200 bg-cyan-50 p-3 text-sm">
+                <div className="md:col-span-2 rounded-sm border border-blue-200 bg-blue-50 p-3 text-sm text-[#3C50E0]">
                     Cash units quota (auto): <strong>{cashQuota}</strong>
                 </div>
 
                 <div className="md:col-span-2">
-                    <button type="submit" disabled={saving} className="rounded-lg bg-cyan-600 px-4 py-2 font-semibold text-white disabled:opacity-60">
+                    <button type="submit" disabled={saving} className="rounded-sm bg-[#3C50E0] px-4 py-2 font-semibold text-white transition hover:bg-[#2f42c6] disabled:opacity-60">
                         {saving ? 'Saving...' : 'Save Quota'}
                     </button>
                 </div>
@@ -1720,7 +1780,7 @@ function QuotasPage() {
             {error && <p className="text-sm text-rose-600">{error}</p>}
 
             {currentQuota && (
-                <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+                <div className="rounded-sm border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
                     Current stored quota for {monthKey}: {currentQuota.total_units_quota} total units, {currentQuota.installment_units_quota} installment units, {currentQuota.total_units_quota - currentQuota.installment_units_quota} cash units.
                 </div>
             )}
@@ -1848,13 +1908,13 @@ function HistoryPage() {
     }, [year, month, branchId]);
 
     return (
-        <div className="mx-auto max-w-6xl space-y-4 rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm">
+        <div className="mx-auto max-w-6xl space-y-4 rounded-sm border border-gray-200 bg-white p-5 shadow-sm">
             <h1 className="text-2xl font-bold">History Page</h1>
 
             <div className="grid gap-3 md:grid-cols-3">
                 <MonthSelector month={month} onChange={setMonth} />
                 <YearSelector year={year} onChange={setYear} />
-                <select value={branchId} onChange={(event) => setBranchId(event.target.value)} className="rounded-lg border border-slate-300 px-3 py-2">
+                <select value={branchId} onChange={(event) => setBranchId(event.target.value)} className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]">
                     <option value="all">All Branches</option>
                     {branchOptions.map((item) => (
                         <option key={item.id} value={String(item.id)}>
@@ -1905,7 +1965,7 @@ function BranchReportPanel({
     };
 }) {
     return (
-        <div className="mx-auto max-w-6xl space-y-4 rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm">
+        <div className="mx-auto max-w-6xl space-y-4 rounded-sm border border-gray-200 bg-white p-5 shadow-sm">
             <h1 className="text-2xl font-bold">{title}</h1>
             <div className="grid gap-3 md:grid-cols-2">
                 <MonthSelector month={month} onChange={onMonthChange} />
@@ -1935,7 +1995,7 @@ function MonthSelector({ month, onChange }: { month: string; onChange: (value: s
     ];
 
     return (
-        <select value={month} onChange={(event) => onChange(event.target.value)} className="rounded-lg border border-slate-300 px-3 py-2">
+        <select value={month} onChange={(event) => onChange(event.target.value)} className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]">
             {monthOptions.map((item) => (
                 <option key={item.value} value={item.value}>
                     {item.label}
@@ -1947,7 +2007,7 @@ function MonthSelector({ month, onChange }: { month: string; onChange: (value: s
 
 function YearSelector({ year, onChange }: { year: string; onChange: (value: string) => void }) {
     return (
-        <select value={year} onChange={(event) => onChange(event.target.value)} className="rounded-lg border border-slate-300 px-3 py-2">
+        <select value={year} onChange={(event) => onChange(event.target.value)} className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]">
             {['2025', '2026', '2027', '2028'].map((item) => (
                 <option key={item} value={item}>
                     {item}
@@ -2004,10 +2064,10 @@ function ReportRowsTable({ rows, loading, error }: { rows: MonthlyBranchesReport
         <>
             <div className="grid gap-3 md:hidden">
                 {rows.map((item, index) => (
-                    <article key={`${item.branch_id}-${item.month}-${index}`} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <article key={`${item.branch_id}-${item.month}-${index}`} className="rounded-sm border border-gray-200 bg-white p-4 shadow-sm">
                         <div className="mb-2 flex items-center justify-between">
                             <h3 className="font-semibold text-slate-900">{item.branch_name ?? `Branch #${item.branch_id}`}</h3>
-                            <span className="rounded-full bg-cyan-50 px-2 py-1 text-xs font-semibold text-cyan-700">{item.month}</span>
+                            <span className="rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-[#3C50E0]">{item.month}</span>
                         </div>
                         <p className="text-xs text-slate-600">Total: {item.total_units_actual}</p>
                         <p className="text-xs text-slate-600">Total (A/Q): {item.total_units_actual} / {item.total_units_quota}</p>
@@ -2019,10 +2079,10 @@ function ReportRowsTable({ rows, loading, error }: { rows: MonthlyBranchesReport
                 ))}
             </div>
 
-            <div className="hidden overflow-x-auto rounded-2xl border border-slate-200/70 bg-white md:block">
+            <div className="hidden overflow-x-auto rounded-sm border border-gray-200 bg-white md:block">
             <table className="w-full text-left text-sm">
                 <thead>
-                    <tr className="sticky top-0 z-10 border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                    <tr className="sticky top-0 z-10 border-b border-gray-200 bg-gray-50 text-xs font-semibold uppercase tracking-wide text-gray-600">
                         <th className="px-3 py-2.5">Branch</th>
                         <th className="px-3 py-2.5">Month</th>
                         <th className="px-3 py-2.5">Total (A/Q)</th>
@@ -2035,7 +2095,7 @@ function ReportRowsTable({ rows, loading, error }: { rows: MonthlyBranchesReport
                 </thead>
                 <tbody>
                     {rows.map((item, index) => (
-                        <tr key={`${item.branch_id}-${item.month}-${index}`} className={`border-b border-slate-100 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/60'}`}>
+                        <tr key={`${item.branch_id}-${item.month}-${index}`} className={`border-b border-gray-100 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/70'}`}>
                             <td className="px-3 py-2.5 font-semibold text-slate-900">{item.branch_name ?? `Branch #${item.branch_id}`}</td>
                             <td className="px-3 py-2.5">{item.month}</td>
                             <td className="px-3 py-2.5">{item.total_units_actual} / {item.total_units_quota}</td>
@@ -2055,21 +2115,25 @@ function ReportRowsTable({ rows, loading, error }: { rows: MonthlyBranchesReport
 
 function MetricCard({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
     return (
-        <article className="rounded-2xl border border-slate-200/70 bg-white/90 p-4 shadow-[0_12px_34px_-28px_rgba(15,23,42,0.45)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_40px_-30px_rgba(8,47,73,0.45)]">
-            <div className="mb-3 flex items-center justify-between text-slate-500">
-                <span className="text-xs font-semibold tracking-wide uppercase">{label}</span>
-                {icon}
+        <article className="rounded-sm border border-gray-200 bg-white px-6 py-5 shadow-sm transition hover:shadow-md">
+            <div className="flex items-center justify-between">
+                <div>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</p>
+                    <h4 className="mt-2 text-2xl font-bold text-gray-900">{value}</h4>
+                </div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-[#3C50E0]">
+                    {icon}
+                </div>
             </div>
-            <p className="text-2xl font-extrabold tracking-tight text-slate-900">{value}</p>
         </article>
     );
 }
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
     return (
-        <div className="rounded-2xl border border-slate-200/70 bg-white/90 p-4 shadow-[0_12px_34px_-28px_rgba(15,23,42,0.45)]">
-            <p className="text-xs font-semibold tracking-wide uppercase text-slate-500">{label}</p>
-            <p className="mt-1 text-lg font-bold text-slate-900">{value}</p>
+        <div className="rounded-sm border border-gray-200 bg-white px-5 py-4 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">{label}</p>
+            <p className="mt-2 text-xl font-bold text-gray-900">{value}</p>
         </div>
     );
 }
@@ -2077,11 +2141,11 @@ function SummaryCard({ label, value }: { label: string; value: string }) {
 function NumberField({ label, value, onChange }: { label: string; value: number; onChange: (value: number) => void }) {
     return (
         <div>
-            <label className="mb-1.5 block text-sm font-semibold text-slate-700">{label}</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">{label}</label>
             <input
                 type="number"
                 min={0}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm transition focus:border-cyan-400 focus:bg-white focus:outline-none"
+                className="w-full rounded-sm border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 transition focus:border-[#3C50E0] focus:outline-none focus:ring-1 focus:ring-[#3C50E0]"
                 value={value}
                 onChange={(event) => onChange(Number(event.target.value))}
             />
@@ -2093,10 +2157,10 @@ function TabButton({ label, active, onClick }: { label: string; active: boolean;
     return (
         <button
             type="button"
-            className={`rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
+            className={`border-b-2 px-5 py-3 text-sm font-medium transition ${
                 active
-                    ? 'bg-gradient-to-r from-cyan-600 to-sky-600 text-white shadow-md shadow-cyan-700/20'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? 'border-[#3C50E0] text-[#3C50E0]'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             }`}
             onClick={onClick}
         >

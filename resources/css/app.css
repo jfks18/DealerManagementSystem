@@ -153,6 +153,15 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground antialiased;
+        background-image:
+            radial-gradient(circle at top left, rgba(16, 185, 129, 0.08), transparent 24%),
+            radial-gradient(circle at top right, rgba(15, 23, 42, 0.05), transparent 22%),
+            linear-gradient(180deg, rgba(248, 250, 252, 1) 0%, rgba(241, 245, 249, 1) 100%);
+    }
+
+    ::selection {
+        background: rgba(16, 185, 129, 0.18);
+        color: rgb(15, 23, 42);
     }
 }
